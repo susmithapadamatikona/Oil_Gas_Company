@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Offshore platform">
+  <defs>
+    <linearGradient id="ocean" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0e2d57"/>
+      <stop offset="100%" stop-color="#06101d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#ocean)"/>
+  <rect y="510" width="1200" height="290" fill="#050b14"/>
+  <g stroke="#d6dce5" stroke-width="12" fill="none" opacity=".92">
+    <path d="M290 190 V510"/>
+    <path d="M410 160 V510"/>
+    <path d="M530 190 V510"/>
+    <path d="M650 130 V510"/>
+    <path d="M770 170 V510"/>
+    <path d="M890 190 V510"/>
+    <path d="M250 240 H930"/>
+    <path d="M220 310 H960"/>
+    <path d="M200 380 H980"/>
+    <path d="M180 450 H1000"/>
+  </g>
+  <g fill="#ff7a00" opacity=".95">
+    <circle cx="330" cy="240" r="12"/>
+    <circle cx="470" cy="210" r="12"/>
+    <circle cx="610" cy="165" r="12"/>
+    <circle cx="750" cy="205" r="12"/>
+    <circle cx="860" cy="240" r="12"/>
+  </g>
+  <path d="M0 540 C180 510 340 580 520 550 C720 515 920 600 1200 560" stroke="#4bb4ff" stroke-width="8" fill="none" opacity=".75"/>
+</svg>

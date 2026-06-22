@@ -1,0 +1,201 @@
+@import url('./style.css');
+@import url('./responsive.css');
+
+body.auth-page {
+  min-height: 100svh;
+  color: var(--text);
+  background:
+    linear-gradient(90deg, rgba(8, 28, 58, 0.95), rgba(8, 28, 58, 0.72)),
+    url('../images/hero-refinery.svg') center/cover fixed;
+}
+
+.auth-shell {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.auth-main {
+  display: grid;
+  place-items: center;
+  padding: 150px 0 84px;
+}
+
+.auth-card {
+  width: min(100%, 520px);
+  padding: 34px;
+  border-radius: 32px;
+  background: rgba(6, 16, 28, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.36);
+  backdrop-filter: blur(18px);
+  transition: transform var(--ease), background var(--ease), border-color var(--ease), box-shadow var(--ease);
+}
+
+@media (hover: hover) {
+  .auth-card:hover {
+    background: linear-gradient(145deg, rgba(13, 45, 82, 0.92), rgba(255, 122, 0, 0.18));
+    border-color: rgba(255, 169, 77, 0.68);
+    transform: translateY(-6px);
+    box-shadow: 0 34px 82px rgba(0, 0, 0, 0.44);
+  }
+}
+
+.contact-card {
+  width: 100%;
+  max-width: none;
+}
+
+.auth-card__title {
+  margin: 0 0 10px;
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  line-height: 1.04;
+}
+
+.auth-card__lead {
+  margin: 0 0 28px;
+  color: rgba(214, 220, 229, 0.88);
+}
+
+.auth-form {
+  display: grid;
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap input,
+.input-wrap textarea,
+.input-wrap select {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.input-wrap textarea {
+  min-height: 140px;
+  padding-top: 14px;
+  resize: vertical;
+}
+
+.input-wrap input::placeholder,
+.input-wrap textarea::placeholder {
+  color: rgba(214, 220, 229, 0.7);
+}
+
+.input-wrap .password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 12px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.field-error {
+  min-height: 18px;
+  color: #ffb5b5;
+  font-size: 0.88rem;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: rgba(214, 220, 229, 0.9);
+}
+
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.strength {
+  display: grid;
+  gap: 8px;
+}
+
+.strength__bars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.strength__bars span {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.strength[data-level='1'] .strength__bars span:nth-child(1),
+.strength[data-level='2'] .strength__bars span:nth-child(-n + 2),
+.strength[data-level='3'] .strength__bars span:nth-child(-n + 3),
+.strength[data-level='4'] .strength__bars span {
+  background: linear-gradient(135deg, var(--orange), var(--gold));
+}
+
+.strength__label {
+  font-size: 0.88rem;
+  color: rgba(214, 220, 229, 0.84);
+}
+
+.auth-note {
+  margin-top: 20px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 122, 0, 0.12);
+  color: rgba(255, 232, 208, 0.96);
+  border: 1px solid rgba(255, 122, 0, 0.14);
+}
+
+.auth-footer {
+  padding: 18px 0 28px;
+  text-align: center;
+  color: rgba(214, 220, 229, 0.82);
+}
+
+.form-message {
+  display: none;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 0.94rem;
+}
+
+.form-message.is-visible {
+  display: block;
+}
+
+.form-message--error {
+  background: rgba(244, 67, 54, 0.16);
+  border: 1px solid rgba(244, 67, 54, 0.2);
+}
+
+.form-message--success {
+  background: rgba(76, 175, 80, 0.16);
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}

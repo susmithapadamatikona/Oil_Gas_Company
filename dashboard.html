@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EnergyCorp Dashboard</title>
+  <meta name="description" content="EnergyCorp secure dashboard for operations, analytics, and team activity.">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-page page-loading" data-panel="dashboard">
+  <div class="site-loader" data-loader>
+    <div class="loader-card">
+      <div class="brand"><img class="brand__logo" src="Assets/logo stackly.webp" alt="Stackly"></div>
+      <div class="loader-ring" aria-hidden="true"></div>
+      <p>Loading dashboard...</p>
+    </div>
+  </div>
+
+  <div class="site-overlay" data-sidebar-overlay></div>
+
+  <div class="dashboard-shell">
+    <aside class="dashboard-sidebar" data-sidebar>
+      <a class="dashboard-brand brand" href="index.html">
+        <img class="brand__logo" src="Assets/logo stackly.webp" alt="Stackly">
+      </a>
+      <nav class="sidebar-nav" data-sidebar-nav>
+        <a href="#overview" data-panel="dashboard">Dashboard</a>
+        <a href="#profile" data-panel="profile">Profile</a>
+        <a href="#projects" data-panel="projects">Projects</a>
+        <a href="#reports" data-panel="reports">Reports</a>
+        <a href="#analytics" data-panel="analytics">Analytics</a>
+        <a href="#messages" data-panel="messages">Messages</a>
+        <a href="#settings" data-panel="settings">Settings</a>
+        <button type="button" data-logout>Logout</button>
+      </nav>
+
+      <div class="dashboard-sidebar__footer">
+        <div class="glass-card">
+          <div class="section-eyebrow">Account</div>
+          <p><strong data-user-name>EnergyCorp User</strong><br><span data-user-company>Company</span></p>
+          <button class="btn btn--primary btn--full" type="button" data-logout>Logout</button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="dashboard-main">
+      <header class="dashboard-topbar">
+        <div class="dashboard-topbar__left">
+          <button class="sidebar-toggle" data-sidebar-toggle aria-label="Open sidebar">☰</button>
+          <div>
+            <div class="section-eyebrow" style="margin-bottom:6px;">Welcome, <span data-user-name>EnergyCorp User</span></div>
+            <strong>Industrial Command Center</strong>
+          </div>
+        </div>
+        <div class="dashboard-topbar__right">
+          <input class="search" type="search" placeholder="Search projects, reports, or messages">
+          <div class="dropdown" data-dropdown>
+            <button class="profile-chip" type="button" data-dropdown-toggle aria-label="Open profile menu">
+              <img class="brand__logo" src="Assets/logo stackly.webp" alt="Stackly">
+              <span data-user-name>EnergyCorp User</span>
+            </button>
+            <div class="dropdown__menu">
+              <button type="button" data-logout>Logout</button>
+              <a href="contact.html">Support</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-content">
+        <section class="dashboard-grid dashboard-grid--metrics" id="overview">
+          <article class="metric-card"><div class="metric-card__label">Revenue Overview</div><div class="metric-card__value">$<span data-dashboard-count="128">0</span>M</div><div class="metric-card__delta">+12% this quarter</div></article>
+          <article class="metric-card"><div class="metric-card__label">Active Projects</div><div class="metric-card__value"><span data-dashboard-count="42">0</span></div><div class="metric-card__delta">Across 18 markets</div></article>
+          <article class="metric-card"><div class="metric-card__label">Operational Analytics</div><div class="metric-card__value"><span data-dashboard-count="98">0</span>%</div><div class="metric-card__delta">Uptime performance</div></article>
+          <article class="metric-card"><div class="metric-card__label">Notifications</div><div class="metric-card__value"><span data-dashboard-count="14">0</span></div><div class="metric-card__delta">Open items</div></article>
+        </section>
+
+        <section class="dashboard-grid dashboard-grid--panels" id="analytics">
+          <article class="panel" data-reveal>
+            <div class="panel__head"><h2 class="panel__title">Operational Trends</h2><span class="chip">Live</span></div>
+            <div class="chart-wrap"><canvas data-bar-chart></canvas></div>
+          </article>
+          <article class="panel" data-reveal>
+            <div class="panel__head"><h2 class="panel__title">Production Momentum</h2><span class="chip">Q2</span></div>
+            <div class="chart-wrap"><canvas data-line-chart></canvas></div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid dashboard-grid--panels" id="reports" style="margin-top:22px;">
+          <article class="panel" data-reveal>
+            <div class="panel__head"><h2 class="panel__title">Portfolio Mix</h2><span class="chip">2026</span></div>
+            <div class="chart-wrap"><canvas data-pie-chart></canvas></div>
+          </article>
+          <article class="panel" data-reveal>
+            <div class="panel__head"><h2 class="panel__title">Recent Activities</h2><span class="chip">Today</span></div>
+            <div class="activity-list">
+              <div class="activity-item"><div class="activity-badge">✓</div><div><strong>Refinery upgrade checkpoint</strong><p>Design review completed with HSE clearance.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">↑</div><div><strong>Pipeline integrity report</strong><p>Inspection windows updated for the north corridor.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">•</div><div><strong>Team performance review</strong><p>Delivery metrics surpassed the monthly target.</p></div></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid dashboard-grid--panels" id="profile" style="margin-top:22px;">
+          <article class="panel profile-card" data-reveal>
+            <div class="panel__head"><h2 class="panel__title">Profile</h2><span class="chip">Secure</span></div>
+            <div class="profile-card__row"><span>User Name</span><strong data-user-name>EnergyCorp User</strong></div>
+            <div class="profile-card__row"><span>Company Name</span><strong data-user-company>Company</strong></div>
+            <div class="profile-card__row"><span>Email</span><strong data-user-email>user@energycorp.com</strong></div>
+            <div class="profile-card__row"><span>Phone</span><strong data-user-phone>N/A</strong></div>
+          </article>
+
+          <article class="panel" id="settings" data-reveal>
+            <div class="panel__head"><h2 class="panel__title">Settings</h2><span class="chip">Manage</span></div>
+            <div class="settings-grid">
+              <div class="settings-item"><div><strong>Edit Profile</strong><p>Update company details and contact information.</p></div><span class="switch" aria-hidden="true"></span></div>
+              <div class="settings-item"><div><strong>Change Password</strong><p>Rotate credentials to maintain secure access.</p></div><span class="switch" aria-hidden="true"></span></div>
+              <div class="settings-item"><div><strong>Notification Settings</strong><p>Choose which updates appear in your dashboard.</p></div><span class="switch" aria-hidden="true"></span></div>
+              <div class="settings-item"><div><strong>Security Settings</strong><p>Control session behavior and device access.</p></div><span class="switch" aria-hidden="true"></span></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="dashboard-grid dashboard-grid--panels" id="messages" style="margin-top:22px;">
+          <article class="panel" data-reveal>
+            <div class="panel__head"><h2 class="panel__title">Team Performance</h2><span class="chip">Weekly</span></div>
+            <div class="activity-list">
+              <div class="activity-item"><div class="activity-badge">A</div><div><strong>Engineering</strong><p>94% milestone completion across active jobs.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">O</div><div><strong>Operations</strong><p>Reduced turnaround delays by 9% week over week.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">H</div><div><strong>HSE</strong><p>Zero recordable incidents for the current cycle.</p></div></div>
+            </div>
+          </article>
+          <article class="panel" id="projects" data-reveal>
+            <div class="panel__head"><h2 class="panel__title">Project Snapshot</h2><span class="chip">Portfolio</span></div>
+            <div class="activity-list">
+              <div class="activity-item"><div class="activity-badge">1</div><div><strong>Offshore Development</strong><p>Commissioning in progress with marine logistics support.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">2</div><div><strong>LNG Expansion</strong><p>Mechanical completion reached on the liquefaction line.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">3</div><div><strong>Pipeline Upgrade</strong><p>Integrity testing scheduled for the next maintenance window.</p></div></div>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="dashboard-footer">
+        <p>© <span data-current-year></span> EnergyCorp Oil & Gas. All Rights Reserved.</p>
+      </footer>
+    </div>
+  </div>
+
+  <script src="js/validation.js"></script>
+  <script src="vendor/aos/aos.js"></script><script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+@media (max-width: 1120px) {
+  .hero__grid,
+  .newsletter__inner,
+  .footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats-band__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .testimonial-track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .site-header__inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .site-nav {
+    position: fixed;
+    inset: 86px 0 auto 0;
+    display: grid;
+    gap: 0;
+    background: rgba(8, 28, 58, 0.98);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 260ms ease, opacity 260ms ease;
+    padding: 20px 16px 24px;
+    backdrop-filter: blur(16px);
+    max-height: calc(100svh - 86px);
+    overflow: auto;
+  }
+
+  .site-nav.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .site-nav__links {
+    display: grid;
+    gap: 0;
+  }
+
+  .site-nav__links a {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-actions {
+    padding-top: 16px;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .grid--3,
+  .grid--4,
+  .grid--2,
+  .testimonial-track {
+    grid-template-columns: 1fr;
+  }
+
+  .hero__content {
+    padding: 124px 0 76px;
+  }
+
+  .hero__title {
+    max-width: 12ch;
+  }
+
+  .hero__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .timeline-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .section {
+    padding: 74px 0;
+  }
+
+  .site-header__inner {
+    min-height: 76px;
+  }
+
+  .brand__logo {
+    width: 132px;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .hero__content {
+    padding: 104px 0 58px;
+  }
+
+  .hero__grid,
+  .newsletter__inner {
+    gap: 22px;
+  }
+
+  .hero__actions,
+  .cta__actions,
+  .newsletter__form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-stats-band {
+    margin-top: 64px;
+  }
+
+  .hero-stats-band__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__bottom-inner,
+  .footer__legal {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .page-intro {
+    padding: 118px 0 60px;
+  }
+
+  .scroll-top {
+    right: 14px;
+    bottom: 14px;
+  }
+}

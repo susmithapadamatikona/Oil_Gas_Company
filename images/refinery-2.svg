@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Refinery lights at dusk">
+  <rect width="1200" height="800" fill="#0c2140"/>
+  <rect width="1200" height="420" fill="url(#sky)"/>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#102a51"/>
+      <stop offset="100%" stop-color="#ff8a33"/>
+    </linearGradient>
+  </defs>
+  <rect y="620" width="1200" height="180" fill="#050b14"/>
+  <g fill="#d6dce5" opacity=".88">
+    <rect x="120" y="360" width="140" height="260" rx="24"/>
+    <rect x="300" y="290" width="110" height="330" rx="22"/>
+    <rect x="440" y="320" width="180" height="300" rx="28"/>
+    <rect x="650" y="250" width="120" height="370" rx="24"/>
+    <rect x="800" y="310" width="160" height="310" rx="28"/>
+    <rect x="990" y="270" width="80" height="350" rx="18"/>
+  </g>
+  <g fill="#ff7a00">
+    <circle cx="190" cy="420" r="11"/>
+    <circle cx="355" cy="350" r="11"/>
+    <circle cx="520" cy="390" r="11"/>
+    <circle cx="710" cy="320" r="11"/>
+    <circle cx="890" cy="370" r="11"/>
+    <circle cx="1030" cy="330" r="11"/>
+  </g>
+</svg>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EnergyCorp Sign Up</title>
+  <meta name="description" content="Create your EnergyCorp account.">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page page-loading" data-page="signup">
+  <div class="site-loader" data-loader>
+    <div class="loader-card">
+      <div class="brand"><img class="brand__logo" src="Assets/logo stackly.webp" alt="Stackly"></div>
+      <div class="loader-ring" aria-hidden="true"></div>
+      <p>Loading secure access...</p>
+    </div>
+  </div>
+
+  <div class="site-overlay" data-overlay></div>
+
+  <div class="auth-shell">
+    <header class="site-header site-header--solid" data-header>
+      <div class="container site-header__inner">
+        <a class="brand" href="index.html"><img class="brand__logo" src="Assets/logo stackly.webp" alt="Stackly"></a>
+        <nav class="site-nav" data-nav aria-label="Primary navigation">
+          <div class="site-nav__links">
+            <a data-nav-link href="index.html">Home</a>
+            <a data-nav-link href="about.html">About</a>
+            <a data-nav-link href="services.html">Services</a><a data-nav-link href="projects.html">Projects</a><a data-nav-link href="sustainability.html">Sustainability</a>
+            <a data-nav-link href="blog.html">Blog</a>
+            <a data-nav-link href="contact.html">Contact</a>
+          </div>
+          <div class="nav-actions">
+            <a class="btn btn--ghost" data-nav-link href="login.html">Login</a>
+            <a class="btn btn--primary" data-nav-link href="signup.html">Sign Up</a>
+          </div>
+        </nav>
+        <button class="nav-toggle" data-nav-toggle aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation">☰</button>
+      </div>
+    </header>
+
+    <main class="auth-main">
+      <section class="auth-card" data-reveal>
+        <div class="section-eyebrow">Create Account</div>
+        <h1 class="auth-card__title">Join EnergyCorp today</h1>
+        <p class="auth-card__lead">Set up your company profile to access the dashboard and project tools.</p>
+
+        <form class="auth-form" data-signup-form>
+          <div class="field">
+            <label for="signup-name">Full Name</label>
+            <div class="input-wrap">
+              <input id="signup-name" name="fullName" type="text" placeholder="Full name" autocomplete="name">
+            </div>
+            <div class="field-error"></div>
+          </div>
+          <div class="field">
+            <label for="signup-company">Company Name</label>
+            <div class="input-wrap">
+              <input id="signup-company" name="companyName" type="text" placeholder="Company name" autocomplete="organization">
+            </div>
+            <div class="field-error"></div>
+          </div>
+          <div class="field">
+            <label for="signup-email">Email Address</label>
+            <div class="input-wrap">
+              <input id="signup-email" name="email" type="email" placeholder="name@company.com" autocomplete="email">
+            </div>
+            <div class="field-error"></div>
+          </div>
+          <div class="field">
+            <label for="signup-phone">Phone Number</label>
+            <div class="input-wrap">
+              <input id="signup-phone" name="phone" type="tel" placeholder="+1 555 000 0000" autocomplete="tel">
+            </div>
+            <div class="field-error"></div>
+          </div>
+          <div class="field">
+            <label for="signup-password">Password</label>
+            <div class="input-wrap">
+              <input id="signup-password" name="password" type="password" placeholder="Create a password" autocomplete="new-password">
+              <button class="password-toggle" type="button" data-password-toggle aria-controls="signup-password" aria-label="Show password">Show</button>
+            </div>
+            <div class="strength" data-strength data-level="0">
+              <div class="strength__bars"><span></span><span></span><span></span><span></span></div>
+              <div class="strength__label">Password strength: <span data-strength-label>Very weak</span></div>
+            </div>
+            <div class="field-error"></div>
+          </div>
+          <div class="field">
+            <label for="signup-confirm">Confirm Password</label>
+            <div class="input-wrap">
+              <input id="signup-confirm" name="confirmPassword" type="password" placeholder="Confirm password" autocomplete="new-password">
+              <button class="password-toggle" type="button" data-password-toggle aria-controls="signup-confirm" aria-label="Show password">Show</button>
+            </div>
+            <div class="field-error"></div>
+          </div>
+          <label class="form-check"><input type="checkbox" name="terms">I agree to the terms and privacy policy</label>
+          <button class="btn btn--primary btn--full" type="submit">Create Account</button>
+        </form>
+
+        <div class="auth-note">Already registered? <a href="login.html"><strong>Sign in here</strong></a>.</div>
+      </section>
+    </main>
+
+    <footer class="auth-footer">
+      <div class="container">
+        <p>© <span data-current-year></span> EnergyCorp Oil & Gas</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/validation.js"></script>
+  <script src="vendor/aos/aos.js"></script><script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

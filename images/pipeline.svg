@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Pipeline infrastructure">
+  <rect width="1200" height="800" fill="#0c2140"/>
+  <rect y="560" width="1200" height="240" fill="#05101c"/>
+  <path d="M60 500 C240 430 330 620 520 550 C720 470 860 560 1140 470" stroke="#d6dce5" stroke-width="42" fill="none" stroke-linecap="round"/>
+  <path d="M60 500 C240 430 330 620 520 550 C720 470 860 560 1140 470" stroke="#ff7a00" stroke-width="8" fill="none" stroke-linecap="round" opacity=".95"/>
+  <g fill="#ff7a00">
+    <circle cx="190" cy="470" r="12"/>
+    <circle cx="430" cy="565" r="12"/>
+    <circle cx="650" cy="500" r="12"/>
+    <circle cx="900" cy="525" r="12"/>
+  </g>
+  <g fill="#d6dce5" opacity=".9">
+    <rect x="110" y="300" width="180" height="200" rx="24"/>
+    <rect x="360" y="250" width="140" height="250" rx="20"/>
+    <rect x="560" y="230" width="170" height="270" rx="24"/>
+    <rect x="800" y="280" width="140" height="220" rx="20"/>
+  </g>
+</svg>
