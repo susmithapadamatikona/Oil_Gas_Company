@@ -41,6 +41,12 @@
       <main class="auth-main">
         <section class="auth-card" data-reveal>
           <div class="auth-card__header">
+            <button class="auth-back" type="button" data-auth-back aria-label="Go back to previous page">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M15.5 5 8.5 12l7 7-1.4 1.4L5.6 12l8.5-8.4L15.5 5Z"/>
+              </svg>
+              <span>Back</span>
+            </button>
             <a class="auth-card__brand" href="index.html">
               <img class="brand__logo" src="Assets/logo stackly.webp" alt="Stackly">
             </a>
@@ -58,13 +64,25 @@
             </div>
             <div class="field">
               <label for="login-role">Role</label>
-              <div class="input-wrap">
-                <select id="login-role" name="role">
+              <div class="input-wrap role-field">
+                <select id="login-role" name="role" data-role-select>
                   <option value="">Select your role</option>
                   <option value="admin">Admin</option>
                   <option value="manager">Manager</option>
                   <option value="operator">Operator</option>
                 </select>
+                <button class="role-field__trigger" type="button" data-role-trigger aria-expanded="false" aria-haspopup="listbox">
+                  <span data-role-label>Select your role</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 10.5 12 15l5-4.5 1.4 1.4L12 17.8 5.6 11.9 7 10.5Z"/>
+                  </svg>
+                </button>
+                <div class="role-field__menu" data-role-menu hidden>
+                  <button type="button" class="role-field__option" data-role-option value="">Select your role</button>
+                  <button type="button" class="role-field__option" data-role-option value="admin">Admin</button>
+                  <button type="button" class="role-field__option" data-role-option value="manager">Manager</button>
+                  <button type="button" class="role-field__option" data-role-option value="operator">Operator</button>
+                </div>
               </div>
               <div class="field-error"></div>
             </div>

@@ -264,6 +264,119 @@
     });
   }
 
+  function handleRoleFields() {
+    const mobileQuery = window.matchMedia('(max-width: 640px)');
+
+    qsa('[data-role-select]').forEach((select) => {
+      const field = select.closest('.role-field');
+      const trigger = qs('[data-role-trigger]', field || document);
+      const label = qs('[data-role-label]', field || document);
+      const menu = qs('[data-role-menu]', field || document);
+      const options = qsa('[data-role-option]', field || document);
+      if (!field || !trigger || !label || !menu) return;
+
+      const syncLabel = () => {
+        const selected = select.selectedOptions[0];
+        label.textContent = selected ? selected.textContent.trim() : 'Select your role';
+        options.forEach((option) => {
+          option.setAttribute('aria-selected', String(option.value === select.value));
+        });
+      };
+
+      const setOpen = (open) => {
+        field.classList.toggle('is-open', open);
+        trigger.setAttribute('aria-expanded', String(open));
+        menu.hidden = !open;
+        field.classList.remove('is-up');
+        menu.style.removeProperty('--role-menu-max-height');
+        if (!open || !mobileQuery.matches) return;
+
+        const rect = field.getBoundingClientRect();
+        const viewportGap = 12;
+        const menuHeight = Math.min(menu.scrollHeight || 240, window.innerHeight - viewportGap * 2);
+        const spaceBelow = window.innerHeight - rect.bottom - viewportGap;
+        const spaceAbove = rect.top - viewportGap;
+        const openUp = spaceBelow < menuHeight && spaceAbove > spaceBelow;
+
+        field.classList.toggle('is-up', openUp);
+        menu.style.setProperty('--role-menu-max-height', `${menuHeight}px`);
+      };
+
+      syncLabel();
+      setOpen(false);
+
+      trigger.addEventListener('click', () => {
+        setOpen(!field.classList.contains('is-open'));
+      });
+
+      options.forEach((option) => {
+        option.addEventListener('click', () => {
+          select.value = option.value;
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+          syncLabel();
+          setOpen(false);
+        });
+      });
+
+      select.addEventListener('change', syncLabel);
+    });
+
+    const repositionOpenMenus = () => {
+      qsa('.role-field.is-open').forEach((field) => {
+        if (!mobileQuery.matches) return;
+        const menu = qs('[data-role-menu]', field);
+        if (!menu) return;
+        const rect = field.getBoundingClientRect();
+        const viewportGap = 12;
+        const menuHeight = Math.min(menu.scrollHeight || 240, window.innerHeight - viewportGap * 2);
+        const spaceBelow = window.innerHeight - rect.bottom - viewportGap;
+        const spaceAbove = rect.top - viewportGap;
+        const openUp = spaceBelow < menuHeight && spaceAbove > spaceBelow;
+
+        field.classList.toggle('is-up', openUp);
+        menu.style.setProperty('--role-menu-max-height', `${menuHeight}px`);
+      });
+    };
+
+    document.addEventListener('click', (event) => {
+      qsa('.role-field.is-open').forEach((field) => {
+        if (!field.contains(event.target)) {
+          const trigger = qs('[data-role-trigger]', field);
+          const menu = qs('[data-role-menu]', field);
+          field.classList.remove('is-open');
+          trigger?.setAttribute('aria-expanded', 'false');
+          if (menu) menu.hidden = true;
+        }
+      });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      qsa('.role-field.is-open').forEach((field) => {
+        const trigger = qs('[data-role-trigger]', field);
+        const menu = qs('[data-role-menu]', field);
+        field.classList.remove('is-open');
+        trigger?.setAttribute('aria-expanded', 'false');
+        if (menu) menu.hidden = true;
+      });
+    });
+
+    window.addEventListener('resize', repositionOpenMenus);
+    window.addEventListener('scroll', repositionOpenMenus, true);
+  }
+
+  function handleBackButtons() {
+    qsa('[data-auth-back]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (window.history.length > 1) {
+          window.history.back();
+          return;
+        }
+        location.href = 'index.html';
+      });
+    });
+  }
+
   function protectDashboard() {
     if (!document.body.classList.contains('dashboard-page')) return;
     const session = getSession();
@@ -301,6 +414,8 @@
     handleLogin();
     handleSignup();
     handleForgotPassword();
+    handleRoleFields();
+    handleBackButtons();
     protectDashboard();
     wireLogout();
 
