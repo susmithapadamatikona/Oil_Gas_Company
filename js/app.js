@@ -1,7 +1,7 @@
 (function () {
   const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => [...root.querySelectorAll(sel)];
-  const storageKey = 'energycorpSession';
+  const storageKey = 'stacklySession';
 
   function setYear() {
     qsa('[data-current-year]').forEach((node) => {
@@ -13,8 +13,8 @@
     const loader = qs('[data-loader]');
     if (!loader) return;
     const hide = () => loader.classList.add('is-hidden');
-    window.addEventListener('load', () => setTimeout(hide, 320), { once: true });
-    setTimeout(hide, 2200);
+    window.addEventListener('load', () => setTimeout(hide, 1500), { once: true });
+    setTimeout(hide, 1500);
   }
 
   function initHeader() {
@@ -163,7 +163,7 @@
           window.ecValidation.showFormMessage(form, 'Please enter a valid email address.', 'error');
           return;
         }
-        window.ecValidation.showFormMessage(form, 'You are subscribed to EnergyCorp updates.', 'success');
+        window.ecValidation.showFormMessage(form, 'You are subscribed to Stackly updates.', 'success');
         form.reset();
       });
     });

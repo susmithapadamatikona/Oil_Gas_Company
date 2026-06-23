@@ -1,6 +1,6 @@
 (function () {
-  const USERS_KEY = 'energycorpUsers';
-  const SESSION_KEY = 'energycorpSession';
+  const USERS_KEY = 'stacklyUsers';
+  const SESSION_KEY = 'stacklySession';
   const qs = (sel, root = document) => root.querySelector(sel);
   const qsa = (sel, root = document) => [...root.querySelectorAll(sel)];
 
@@ -155,10 +155,10 @@
       await submit();
 
       const emailValue = email.value.trim();
-      const userName = emailValue.split('@')[0] || 'EnergyCorp User';
+      const userName = emailValue.split('@')[0] || 'Stackly User';
       const user = {
         name: userName,
-        company: 'EnergyCorp',
+        company: 'Stackly',
         email: emailValue,
         phone: '',
         role: role.value.trim(),
@@ -242,7 +242,7 @@
       const fullName = `${fields.firstName.value.trim()} ${fields.lastName.value.trim()}`.trim();
       users.push({
         name: fullName,
-        company: 'EnergyCorp',
+        company: 'Stackly',
         role: fields.role.value.trim(),
         email: fields.email.value.trim(),
         phone: fields.phone.value.trim(),
@@ -259,10 +259,7 @@
   function handleForgotPassword() {
     qsa('[data-forgot-password]').forEach((button) => {
       button.addEventListener('click', () => {
-        const form = button.closest('form');
-        if (form) {
-          showInlineHint(form, 'Password recovery is handled by your IT administrator in this demo build.');
-        }
+        location.href = '404.html';
       });
     });
   }
