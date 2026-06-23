@@ -250,4 +250,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', init);
+  window.addEventListener('pageshow', () => {
+    document.body.classList.remove('page-loading', 'page-leaving');
+  });
 })();
