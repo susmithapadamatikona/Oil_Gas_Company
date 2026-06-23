@@ -42,6 +42,7 @@
       company: user.company,
       email: user.email,
       phone: user.phone || '',
+      role: user.role || '',
     };
     if (remember) {
       write(SESSION_KEY, payload);
@@ -55,6 +56,11 @@
   function clearSession() {
     localStorage.removeItem(SESSION_KEY);
     sessionStorage.removeItem(SESSION_KEY);
+  }
+
+  function formatRole(role) {
+    const value = String(role || '').trim();
+    return value ? value.charAt(0).toUpperCase() + value.slice(1).toLowerCase() : 'N/A';
   }
 
   function showInlineHint(form, message) {
@@ -77,7 +83,7 @@
         const show = input.type === 'password';
         input.type = show ? 'text' : 'password';
         button.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
-        button.textContent = show ? 'Hide' : 'Show';
+        button.classList.toggle('is-visible', show);
       });
     });
   }
@@ -95,44 +101,69 @@
     const form = qs('[data-login-form]');
     if (!form) return;
     const email = qs('[name="email"]', form);
+    const role = qs('[name="role"]', form);
     const password = qs('[name="password"]', form);
     const remember = qs('[name="remember"]', form);
+    const submitButton = qs('[type="submit"]', form);
+
+    function clearLoginFields() {
+      email.value = '';
+      role.value = '';
+      password.value = '';
+      if (remember) remember.checked = false;
+      window.ecValidation.clearFormMessages(form);
+    }
 
     const submit = async () => {
-      const btn = qs('[type="submit"]', form);
-      btn.disabled = true;
-      btn.dataset.originalText = btn.textContent;
-      btn.textContent = 'Signing in...';
+      submitButton.disabled = true;
+      submitButton.dataset.originalText = submitButton.textContent;
+      submitButton.textContent = 'Signing in...';
       form.classList.add('is-loading');
       await new Promise((resolve) => setTimeout(resolve, 900));
-      btn.disabled = false;
-      btn.textContent = btn.dataset.originalText || 'Login';
+      submitButton.disabled = false;
+      submitButton.textContent = submitButton.dataset.originalText || 'Login';
       form.classList.remove('is-loading');
     };
+
+    clearLoginFields();
+    requestAnimationFrame(clearLoginFields);
+    setTimeout(clearLoginFields, 250);
+    setTimeout(clearLoginFields, 800);
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       window.ecValidation.clearFormMessages(form);
       let valid = true;
 
-      if (!window.ecValidation.validateEmail(email.value)) {
+      if (!email.value.trim()) {
+        window.ecValidation.setFieldMessage(email, 'Please enter your email address.');
+        valid = false;
+      } else if (!window.ecValidation.validateEmail(email.value)) {
         window.ecValidation.setFieldMessage(email, 'Enter a valid business email.');
         valid = false;
       }
+      if (!role.value.trim()) {
+        window.ecValidation.setFieldMessage(role, 'Please select your role.');
+        valid = false;
+      }
       if (!password.value.trim()) {
-        window.ecValidation.setFieldMessage(password, 'Password is required.');
+        window.ecValidation.setFieldMessage(password, 'Please enter your password.');
         valid = false;
       }
       if (!valid) return;
 
       await submit();
 
-      const users = getUsers();
-      const user = users.find((entry) => entry.email.toLowerCase() === email.value.trim().toLowerCase() && entry.password === password.value);
-      if (!user) {
-        window.ecValidation.showFormMessage(form, 'We could not find a matching account.', 'error');
-        return;
-      }
+      const emailValue = email.value.trim();
+      const userName = emailValue.split('@')[0] || 'EnergyCorp User';
+      const user = {
+        name: userName,
+        company: 'EnergyCorp',
+        email: emailValue,
+        phone: '',
+        role: role.value.trim(),
+        password: password.value,
+      };
 
       setSession(user, remember.checked);
       window.ecValidation.showFormMessage(form, 'Login successful. Redirecting to the dashboard...', 'success');
@@ -145,6 +176,7 @@
   function handleSignup() {
     const form = qs('[data-signup-form]');
     if (!form) return;
+    const role = qs('[name="role"]', form);
     const password = qs('[name="password"]', form);
     const confirm = qs('[name="confirmPassword"]', form);
     const terms = qs('[name="terms"]', form);
@@ -156,8 +188,9 @@
       event.preventDefault();
       window.ecValidation.clearFormMessages(form);
       const fields = {
-        name: qs('[name="fullName"]', form),
-        company: qs('[name="companyName"]', form),
+        firstName: qs('[name="firstName"]', form),
+        lastName: qs('[name="lastName"]', form),
+        role,
         email: qs('[name="email"]', form),
         phone: qs('[name="phone"]', form),
         password,
@@ -165,12 +198,16 @@
       };
 
       let valid = true;
-      if (!fields.name.value.trim()) {
-        window.ecValidation.setFieldMessage(fields.name, 'Please enter your full name.');
+      if (!fields.firstName.value.trim()) {
+        window.ecValidation.setFieldMessage(fields.firstName, 'Please enter your first name.');
         valid = false;
       }
-      if (!fields.company.value.trim()) {
-        window.ecValidation.setFieldMessage(fields.company, 'Please enter your company name.');
+      if (!fields.lastName.value.trim()) {
+        window.ecValidation.setFieldMessage(fields.lastName, 'Please enter your last name.');
+        valid = false;
+      }
+      if (!fields.role.value.trim()) {
+        window.ecValidation.setFieldMessage(fields.role, 'Please select a role.');
         valid = false;
       }
       if (!window.ecValidation.validateEmail(fields.email.value)) {
@@ -178,7 +215,7 @@
         valid = false;
       }
       if (!window.ecValidation.validatePhone(fields.phone.value)) {
-        window.ecValidation.setFieldMessage(fields.phone, 'Please enter a valid phone number.');
+        window.ecValidation.setFieldMessage(fields.phone, 'Please enter a valid mobile number.');
         valid = false;
       }
       if ((password.value || '').length < 8) {
@@ -202,9 +239,11 @@
         return;
       }
 
+      const fullName = `${fields.firstName.value.trim()} ${fields.lastName.value.trim()}`.trim();
       users.push({
-        name: fields.name.value.trim(),
-        company: fields.company.value.trim(),
+        name: fullName,
+        company: 'EnergyCorp',
+        role: fields.role.value.trim(),
         email: fields.email.value.trim(),
         phone: fields.phone.value.trim(),
         password: password.value,
@@ -238,19 +277,17 @@
     const userName = qs('[data-user-name]');
     const companyName = qs('[data-user-company]');
     const userEmail = qs('[data-user-email]');
+    const userRole = qs('[data-user-role]');
+    const displayRole = formatRole(session.role);
     qsa('[data-user-fullname]').forEach((node) => (node.textContent = session.name));
     qsa('[data-user-company]').forEach((node) => (node.textContent = session.company));
     qsa('[data-user-email]').forEach((node) => (node.textContent = session.email));
     qsa('[data-user-phone]').forEach((node) => (node.textContent = session.phone || 'N/A'));
+    qsa('[data-user-role]').forEach((node) => (node.textContent = displayRole));
     if (userName) userName.textContent = session.name;
     if (companyName) companyName.textContent = session.company;
     if (userEmail) userEmail.textContent = session.email;
-  }
-
-  function redirectLoggedInUsers() {
-    if ((document.body.classList.contains('auth-page') || document.body.dataset.page === 'login' || document.body.dataset.page === 'signup') && getSession()) {
-      location.href = 'dashboard.html';
-    }
+    if (userRole) userRole.textContent = displayRole;
   }
 
   function wireLogout() {
@@ -268,24 +305,7 @@
     handleSignup();
     handleForgotPassword();
     protectDashboard();
-    redirectLoggedInUsers();
     wireLogout();
-
-    qsa('[data-sidebar-toggle]').forEach((button) => {
-      button.addEventListener('click', () => {
-        const sidebar = qs('[data-sidebar]');
-        const overlay = qs('[data-sidebar-overlay]');
-        const open = !sidebar?.classList.contains('is-open');
-        sidebar?.classList.toggle('is-open', open);
-        overlay?.classList.toggle('is-visible', open);
-      });
-    });
-
-    qs('[data-sidebar-overlay]')?.addEventListener('click', () => {
-      const sidebar = qs('[data-sidebar]');
-      sidebar?.classList.remove('is-open');
-      qs('[data-sidebar-overlay]')?.classList.remove('is-visible');
-    });
 
     qsa('[data-dropdown-toggle]').forEach((button) => {
       button.addEventListener('click', (event) => {

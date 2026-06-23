@@ -152,16 +152,98 @@
   function initSidebarState() {
     const sidebar = qs('[data-sidebar]');
     const overlay = qs('[data-sidebar-overlay]');
-    const close = () => sidebar?.classList.remove('is-open');
+    const toggle = qs('[data-sidebar-toggle]');
+    const close = () => {
+      sidebar?.classList.remove('is-open');
+      overlay?.classList.remove('is-visible');
+      toggle?.setAttribute('aria-expanded', 'false');
+      toggle?.setAttribute('aria-label', 'Open sidebar');
+      document.body.classList.remove('dashboard-sidebar-open');
+    };
+    const open = () => {
+      sidebar?.classList.add('is-open');
+      overlay?.classList.add('is-visible');
+      toggle?.setAttribute('aria-expanded', 'true');
+      toggle?.setAttribute('aria-label', 'Close sidebar');
+      document.body.classList.add('dashboard-sidebar-open');
+    };
+    const setOpen = (nextOpen) => {
+      if (nextOpen) open();
+      else close();
+    };
+
+    toggle?.addEventListener('click', () => setOpen(!sidebar?.classList.contains('is-open')));
     overlay?.addEventListener('click', close);
+    qsa('[data-sidebar-close]').forEach((button) => button.addEventListener('click', close));
     qsa('[data-sidebar-nav] a').forEach((link) => link.addEventListener('click', close));
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') close();
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 920) close();
+    });
   }
 
-  function highlightSidebar() {
-    const current = document.body.dataset.panel || 'dashboard';
+  const dashboardViews = {
+    dashboard: { section: '#overview' },
+    profile: { section: '#profile', panel: 'profile' },
+    projects: { section: '#messages', panel: 'projects' },
+    reports: { section: '#reports' },
+    analytics: { section: '#analytics' },
+    messages: { section: '#messages', panel: 'messages' },
+    settings: { section: '#profile', panel: 'settings' },
+  };
+
+  function setActiveSidebar(current) {
     qsa('[data-sidebar-nav] a').forEach((link) => {
-      if (link.dataset.panel === current) link.classList.add('is-active');
+      link.classList.toggle('is-active', link.dataset.panel === current);
     });
+  }
+
+  function getPanelFromHash() {
+    const panel = (location.hash || '#overview').replace('#', '');
+    if (panel === 'overview') return 'dashboard';
+    return dashboardViews[panel] ? panel : 'dashboard';
+  }
+
+  function showDashboardView(panel) {
+    const current = dashboardViews[panel] ? panel : 'dashboard';
+    const view = dashboardViews[current];
+    document.body.dataset.panel = current;
+
+    qsa('[data-dashboard-section]').forEach((section) => section.classList.add('is-hidden'));
+    qsa('[data-dashboard-panel]').forEach((item) => item.classList.add('is-hidden'));
+
+    const section = qs(view.section);
+    if (!section) return;
+    section?.classList.remove('is-hidden');
+
+    if (view.panel) {
+      qs(`[data-dashboard-panel="${view.panel}"]`, section)?.classList.remove('is-hidden');
+    } else {
+      qsa('[data-dashboard-panel]', section).forEach((item) => item.classList.remove('is-hidden'));
+    }
+
+    setActiveSidebar(current);
+    if (window.AOS) window.AOS.refreshHard();
+    if (current === 'analytics' || current === 'reports') {
+      requestAnimationFrame(initCharts);
+    }
+  }
+
+  function initDashboardViews() {
+    qsa('[data-sidebar-nav] a').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const href = link.getAttribute('href') || '#overview';
+        history.pushState(null, '', href);
+        showDashboardView(getPanelFromHash());
+      });
+    });
+
+    window.addEventListener('popstate', () => showDashboardView(getPanelFromHash()));
+    window.addEventListener('hashchange', () => showDashboardView(getPanelFromHash()));
+    showDashboardView(getPanelFromHash());
   }
 
   function init() {
@@ -169,7 +251,7 @@
     initCharts();
     animateMetrics();
     initSidebarState();
-    highlightSidebar();
+    initDashboardViews();
   }
 
   document.addEventListener('DOMContentLoaded', init);

@@ -34,6 +34,7 @@
         nav.classList.toggle('is-open', open);
         overlay && overlay.classList.toggle('is-visible', open);
         toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
         document.body.classList.toggle('nav-open', open);
       };
 

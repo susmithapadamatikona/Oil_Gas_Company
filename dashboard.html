@@ -23,6 +23,7 @@
       <a class="dashboard-brand brand" href="index.html">
         <img class="brand__logo" src="Assets/logo stackly.webp" alt="Stackly">
       </a>
+      <button class="sidebar-close" type="button" data-sidebar-close aria-label="Close sidebar">X</button>
       <nav class="sidebar-nav" data-sidebar-nav>
         <a href="#overview" data-panel="dashboard">Dashboard</a>
         <a href="#profile" data-panel="profile">Profile</a>
@@ -33,31 +34,25 @@
         <a href="#settings" data-panel="settings">Settings</a>
         <button type="button" data-logout>Logout</button>
       </nav>
-
-      <div class="dashboard-sidebar__footer">
-        <div class="glass-card">
-          <div class="section-eyebrow">Account</div>
-          <p><strong data-user-name>EnergyCorp User</strong><br><span data-user-company>Company</span></p>
-          <button class="btn btn--primary btn--full" type="button" data-logout>Logout</button>
-        </div>
-      </div>
     </aside>
 
     <div class="dashboard-main">
       <header class="dashboard-topbar">
+        <a class="dashboard-mobile-brand brand" href="index.html" aria-label="Stackly home">
+          <img class="brand__logo" src="Assets/logo stackly.webp" alt="Stackly">
+        </a>
         <div class="dashboard-topbar__left">
-          <button class="sidebar-toggle" data-sidebar-toggle aria-label="Open sidebar">☰</button>
+          <button class="sidebar-toggle" data-sidebar-toggle aria-expanded="false" aria-label="Open sidebar">☰</button>
           <div>
             <div class="section-eyebrow" style="margin-bottom:6px;">Welcome, <span data-user-name>EnergyCorp User</span></div>
-            <strong>Industrial Command Center</strong>
+            <span class="role-badge" data-user-role>Role</span>
           </div>
         </div>
+        <strong class="dashboard-topbar__title">Industrial Command Center</strong>
         <div class="dashboard-topbar__right">
-          <input class="search" type="search" placeholder="Search projects, reports, or messages">
           <div class="dropdown" data-dropdown>
             <button class="profile-chip" type="button" data-dropdown-toggle aria-label="Open profile menu">
-              <img class="brand__logo" src="Assets/logo stackly.webp" alt="Stackly">
-              <span data-user-name>EnergyCorp User</span>
+              <span data-user-email>user@energycorp.com</span>
             </button>
             <div class="dropdown__menu">
               <button type="button" data-logout>Logout</button>
@@ -68,25 +63,52 @@
       </header>
 
       <main class="dashboard-content">
-        <section class="dashboard-grid dashboard-grid--metrics" id="overview">
+        <section class="dashboard-grid dashboard-grid--metrics" id="overview" data-dashboard-section>
           <article class="metric-card"><div class="metric-card__label">Revenue Overview</div><div class="metric-card__value">$<span data-dashboard-count="128">0</span>M</div><div class="metric-card__delta">+12% this quarter</div></article>
           <article class="metric-card"><div class="metric-card__label">Active Projects</div><div class="metric-card__value"><span data-dashboard-count="42">0</span></div><div class="metric-card__delta">Across 18 markets</div></article>
           <article class="metric-card"><div class="metric-card__label">Operational Analytics</div><div class="metric-card__value"><span data-dashboard-count="98">0</span>%</div><div class="metric-card__delta">Uptime performance</div></article>
           <article class="metric-card"><div class="metric-card__label">Notifications</div><div class="metric-card__value"><span data-dashboard-count="14">0</span></div><div class="metric-card__delta">Open items</div></article>
+          <article class="panel panel--wide">
+            <div class="panel__head"><h2 class="panel__title">Operations Summary</h2><span class="chip">Today</span></div>
+            <div class="data-table">
+              <div><span>North Refinery</span><strong>96% uptime</strong><em>Stable throughput</em></div>
+              <div><span>Offshore Block A</span><strong>82k bbl/day</strong><em>Marine transfer active</em></div>
+              <div><span>Pipeline Corridor</span><strong>418 km</strong><em>Inspection window open</em></div>
+              <div><span>LNG Terminal</span><strong>7 vessels</strong><em>Loading schedule on time</em></div>
+            </div>
+          </article>
+          <article class="panel panel--wide">
+            <div class="panel__head"><h2 class="panel__title">Priority Alerts</h2><span class="chip">4 open</span></div>
+            <div class="activity-list">
+              <div class="activity-item"><div class="activity-badge">1</div><div><strong>Compressor maintenance due</strong><p>Unit C-14 requires service confirmation before night shift.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">2</div><div><strong>Safety audit pending</strong><p>HSE team needs final checklist upload for the west yard.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">3</div><div><strong>Fuel stock review</strong><p>Diesel inventory moved below the planned weekly buffer.</p></div></div>
+            </div>
+          </article>
         </section>
 
-        <section class="dashboard-grid dashboard-grid--panels" id="analytics">
+        <section class="dashboard-grid dashboard-grid--panels" id="analytics" data-dashboard-section>
           <article class="panel" data-reveal>
             <div class="panel__head"><h2 class="panel__title">Operational Trends</h2><span class="chip">Live</span></div>
             <div class="chart-wrap"><canvas data-bar-chart></canvas></div>
+            <div class="mini-stats">
+              <div><span>Avg output</span><strong>74%</strong></div>
+              <div><span>Best asset</span><strong>LNG-2</strong></div>
+              <div><span>Delay risk</span><strong>Low</strong></div>
+            </div>
           </article>
           <article class="panel" data-reveal>
             <div class="panel__head"><h2 class="panel__title">Production Momentum</h2><span class="chip">Q2</span></div>
             <div class="chart-wrap"><canvas data-line-chart></canvas></div>
+            <div class="data-table data-table--compact">
+              <div><span>Week 1</span><strong>91%</strong><em>On plan</em></div>
+              <div><span>Week 2</span><strong>94%</strong><em>Improved flow</em></div>
+              <div><span>Week 3</span><strong>98%</strong><em>Peak output</em></div>
+            </div>
           </article>
         </section>
 
-        <section class="dashboard-grid dashboard-grid--panels" id="reports" style="margin-top:22px;">
+        <section class="dashboard-grid dashboard-grid--panels" id="reports" style="margin-top:22px;" data-dashboard-section>
           <article class="panel" data-reveal>
             <div class="panel__head"><h2 class="panel__title">Portfolio Mix</h2><span class="chip">2026</span></div>
             <div class="chart-wrap"><canvas data-pie-chart></canvas></div>
@@ -97,45 +119,59 @@
               <div class="activity-item"><div class="activity-badge">✓</div><div><strong>Refinery upgrade checkpoint</strong><p>Design review completed with HSE clearance.</p></div></div>
               <div class="activity-item"><div class="activity-badge">↑</div><div><strong>Pipeline integrity report</strong><p>Inspection windows updated for the north corridor.</p></div></div>
               <div class="activity-item"><div class="activity-badge">•</div><div><strong>Team performance review</strong><p>Delivery metrics surpassed the monthly target.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">4</div><div><strong>Carbon tracking report</strong><p>Monthly emissions dashboard shared with sustainability leads.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">5</div><div><strong>Vendor compliance review</strong><p>Critical supplier certificates renewed for offshore logistics.</p></div></div>
             </div>
           </article>
         </section>
 
-        <section class="dashboard-grid dashboard-grid--panels" id="profile" style="margin-top:22px;">
-          <article class="panel profile-card" data-reveal>
+        <section class="dashboard-grid dashboard-grid--panels" id="profile" style="margin-top:22px;" data-dashboard-section>
+          <article class="panel profile-card" data-dashboard-panel="profile" data-reveal>
             <div class="panel__head"><h2 class="panel__title">Profile</h2><span class="chip">Secure</span></div>
             <div class="profile-card__row"><span>User Name</span><strong data-user-name>EnergyCorp User</strong></div>
             <div class="profile-card__row"><span>Company Name</span><strong data-user-company>Company</strong></div>
             <div class="profile-card__row"><span>Email</span><strong data-user-email>user@energycorp.com</strong></div>
+            <div class="profile-card__row"><span>Role</span><strong data-user-role>Role</strong></div>
             <div class="profile-card__row"><span>Phone</span><strong data-user-phone>N/A</strong></div>
+            <div class="profile-card__row"><span>Department</span><strong>Operations Control</strong></div>
+            <div class="profile-card__row"><span>Access Level</span><strong>Dashboard User</strong></div>
+            <div class="profile-card__row"><span>Last Login</span><strong>Today</strong></div>
           </article>
 
-          <article class="panel" id="settings" data-reveal>
+          <article class="panel" id="settings" data-dashboard-panel="settings" data-reveal>
             <div class="panel__head"><h2 class="panel__title">Settings</h2><span class="chip">Manage</span></div>
             <div class="settings-grid">
               <div class="settings-item"><div><strong>Edit Profile</strong><p>Update company details and contact information.</p></div><span class="switch" aria-hidden="true"></span></div>
               <div class="settings-item"><div><strong>Change Password</strong><p>Rotate credentials to maintain secure access.</p></div><span class="switch" aria-hidden="true"></span></div>
               <div class="settings-item"><div><strong>Notification Settings</strong><p>Choose which updates appear in your dashboard.</p></div><span class="switch" aria-hidden="true"></span></div>
               <div class="settings-item"><div><strong>Security Settings</strong><p>Control session behavior and device access.</p></div><span class="switch" aria-hidden="true"></span></div>
+              <div class="settings-item"><div><strong>Report Preferences</strong><p>Choose weekly or monthly operational summary format.</p></div><span class="switch" aria-hidden="true"></span></div>
+              <div class="settings-item"><div><strong>Asset Alerts</strong><p>Receive warnings for high-risk equipment or delayed jobs.</p></div><span class="switch" aria-hidden="true"></span></div>
+              <div class="settings-item"><div><strong>Two Step Review</strong><p>Require approval before critical dashboard changes.</p></div><span class="switch" aria-hidden="true"></span></div>
             </div>
           </article>
         </section>
 
-        <section class="dashboard-grid dashboard-grid--panels" id="messages" style="margin-top:22px;">
-          <article class="panel" data-reveal>
+        <section class="dashboard-grid dashboard-grid--panels" id="messages" style="margin-top:22px;" data-dashboard-section>
+          <article class="panel" data-dashboard-panel="messages" data-reveal>
             <div class="panel__head"><h2 class="panel__title">Team Performance</h2><span class="chip">Weekly</span></div>
             <div class="activity-list">
               <div class="activity-item"><div class="activity-badge">A</div><div><strong>Engineering</strong><p>94% milestone completion across active jobs.</p></div></div>
               <div class="activity-item"><div class="activity-badge">O</div><div><strong>Operations</strong><p>Reduced turnaround delays by 9% week over week.</p></div></div>
               <div class="activity-item"><div class="activity-badge">H</div><div><strong>HSE</strong><p>Zero recordable incidents for the current cycle.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">M</div><div><strong>Maintenance</strong><p>Closed 27 work orders with 4 tasks pending parts arrival.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">L</div><div><strong>Logistics</strong><p>Crude transfer slots confirmed for the next 48 hours.</p></div></div>
             </div>
           </article>
-          <article class="panel" id="projects" data-reveal>
+          <article class="panel" id="projects" data-dashboard-panel="projects" data-reveal>
             <div class="panel__head"><h2 class="panel__title">Project Snapshot</h2><span class="chip">Portfolio</span></div>
             <div class="activity-list">
               <div class="activity-item"><div class="activity-badge">1</div><div><strong>Offshore Development</strong><p>Commissioning in progress with marine logistics support.</p></div></div>
               <div class="activity-item"><div class="activity-badge">2</div><div><strong>LNG Expansion</strong><p>Mechanical completion reached on the liquefaction line.</p></div></div>
               <div class="activity-item"><div class="activity-badge">3</div><div><strong>Pipeline Upgrade</strong><p>Integrity testing scheduled for the next maintenance window.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">4</div><div><strong>Refinery Optimization</strong><p>Heat exchanger replacement plan moved into procurement review.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">5</div><div><strong>Digital Monitoring Rollout</strong><p>Sensor onboarding completed for 62% of priority equipment.</p></div></div>
+              <div class="activity-item"><div class="activity-badge">6</div><div><strong>Terminal Safety Upgrade</strong><p>Fire system validation scheduled with HSE and operations teams.</p></div></div>
             </div>
           </article>
         </section>
