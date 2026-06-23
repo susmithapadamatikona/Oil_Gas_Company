@@ -87,7 +87,7 @@ body.dashboard-sidebar-open {
   top: 0;
   z-index: 100;
   display: grid;
-  grid-template-columns: minmax(220px, 1fr) auto minmax(220px, 1fr);
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
   gap: 16px;
   padding: 18px 28px;
@@ -101,33 +101,64 @@ body.dashboard-sidebar-open {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+}
+
+.dashboard-topbar__left {
+  grid-column: 1;
 }
 
 .dashboard-mobile-brand {
   display: none;
 }
 
-.dashboard-topbar__title {
-  justify-self: center;
-  text-align: center;
-  font-size: 1.22rem;
+.dashboard-topbar__right {
+  grid-column: 3;
+  justify-content: flex-end;
+  justify-self: end;
+  width: max-content;
 }
 
-.dashboard-topbar__right {
-  justify-content: flex-end;
+.dashboard-topbar__left .section-eyebrow {
+  margin-bottom: 4px;
+  font-size: 1.03rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.dashboard-topbar__left .section-eyebrow [data-user-name] {
+  display: inline-block;
+  font-size: 1.16em;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.profile-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-chip__icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  fill: currentColor;
+  opacity: 0.92;
 }
 
 .role-badge {
   display: inline-flex;
   align-items: center;
-  min-height: 30px;
+  min-height: 24px;
   margin-top: 8px;
-  padding: 5px 12px;
+  padding: 3px 10px;
   border-radius: 999px;
   background: rgba(255, 122, 0, 0.14);
   color: var(--gold);
-  font-size: 0.86rem;
-  font-weight: 800;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .dashboard-content {
@@ -412,7 +443,7 @@ body.dashboard-sidebar-open .sidebar-toggle::after {
 .profile-chip {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   max-width: min(38vw, 360px);
   min-height: 48px;
   padding: 8px 18px;
@@ -421,7 +452,7 @@ body.dashboard-sidebar-open .sidebar-toggle::after {
   color: var(--text);
   font-weight: 700;
   overflow-wrap: anywhere;
-  text-align: center;
+  text-align: right;
 }
 
 .dropdown {
@@ -527,44 +558,45 @@ body.dashboard-sidebar-open .sidebar-toggle::after {
   .dashboard-topbar {
     position: relative;
     padding: 14px 16px;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     gap: 12px;
   }
 
   .dashboard-mobile-brand {
-    display: inline-flex;
-    width: max-content;
-    order: -3;
-    padding-right: 58px;
-  }
-
-  .dashboard-mobile-brand .brand__logo {
-    width: 124px;
-    filter: none;
+    display: none;
   }
 
   .dashboard-topbar__left {
-    order: -1;
-    padding-right: 60px;
+    padding-right: 0;
   }
 
   .dashboard-topbar__right {
-    order: 1;
+    padding-left: 0;
   }
 
-  .dashboard-topbar__right,
-  .dashboard-topbar__title,
-  .profile-chip {
-    width: 100%;
+  .dashboard-topbar__left .section-eyebrow {
+    font-size: 0.92rem;
+    letter-spacing: 0.13em;
   }
 
-  .dashboard-topbar__title {
-    order: 0;
-    font-size: 1.05rem;
+  .dashboard-topbar__left .section-eyebrow [data-user-name] {
+    font-size: 1.08em;
+    letter-spacing: 0.06em;
+  }
+
+  .role-badge {
+    min-height: 22px;
+    padding: 2px 9px;
+    font-size: 0.72rem;
   }
 
   .profile-chip {
     max-width: none;
+  }
+
+  .profile-chip__icon {
+    width: 17px;
+    height: 17px;
   }
 
   .dashboard-content {
@@ -600,17 +632,28 @@ body.dashboard-sidebar-open .sidebar-toggle::after {
   }
 
   .dashboard-topbar {
-    padding: 12px;
-  }
-
-  .dashboard-mobile-brand .brand__logo {
-    width: 112px;
+    padding: 12px 14px;
+    gap: 10px;
   }
 
   .dashboard-topbar__left,
   .dashboard-topbar__right {
-    width: 100%;
-    align-items: flex-start;
+    width: auto;
+    align-items: center;
+  }
+
+  .dashboard-topbar__left .section-eyebrow {
+    font-size: 0.86rem;
+  }
+
+  .dashboard-topbar__left .section-eyebrow [data-user-name] {
+    font-size: 1.02em;
+  }
+
+  .role-badge {
+    min-height: 20px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
   }
 
   .dashboard-content {
@@ -669,10 +712,6 @@ body.dashboard-sidebar-open .sidebar-toggle::after {
   .sidebar-nav button {
     min-height: 44px;
     border-radius: 14px;
-  }
-
-  .dashboard-topbar__title {
-    font-size: 0.98rem;
   }
 
   .profile-chip {
